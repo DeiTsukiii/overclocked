@@ -1,4 +1,4 @@
-# 🌐 CyberNet Tycoon: Modular Data Automation
+# 🌐 Overclocked: Modular Data Automation
 
 An immersive, node-based automation and incremental simulation game built with **Phaser.js**. Step into the shoes of a rogue data broker and systems architect. Buy advanced hardware modules, wire them together dynamically, download massive text and image datasets, filter out malicious viruses, and sell pristine data on the digital black market to scale your operation from a local $200 setup into a multi-billion dollar server empire.
 
