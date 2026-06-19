@@ -25,21 +25,15 @@ export default class TaskWorker extends Module {
         this.inputs[0].label.obj.setText(`Clock\n${formatSpeed(clockSpeed)}`);
 
         if (time - this.lastMoneyCollected >= 1000) {
-            this.stats.money += clockSpeed / 1000;
+            this.stats.money += clockSpeed / 1e5;
             this.lastMoneyCollected = time;
         }
 
         if (this.outputs[0].connectedWires.length > 0) this.outputs[0].connectedWires.forEach(wire => {
             if (this.lastWireSent === wire && this.outputs[0].connectedWires.length > 1) return;
-            const moneyToSend = (() => {
-                if (this.stats.money > 0) {
-                    return this.stats.money;
-                }
-                return 0;
-            })();
-            this.stats.money -= moneyToSend;
-            if (moneyToSend > 0) this.lastWireSent = wire; 
-            wire.data = { type: this.dataType, money: wire.data?.money ? wire.data.money + moneyToSend : moneyToSend}
+            if (this.stats.money > 0) this.lastWireSent = wire; 
+            wire.data = { type: this.dataType, money: wire.data?.money ? wire.data.money + this.stats.money : this.stats.money}
+            this.stats.money = 0;
         });
 
         this.outputs[0].label.obj.setText(`Money\n$${formatNum(this.stats.money)} [${formatNum(clockSpeed / 1000)}/s]`);
