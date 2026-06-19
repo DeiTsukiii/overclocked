@@ -25,7 +25,7 @@ export default class TaskWorker extends Module {
         this.inputs[0].label.obj.setText(`Clock\n${formatSpeed(clockSpeed)}`);
 
         if (time - this.lastMoneyCollected >= 1000) {
-            this.stats.money += clockSpeed / 1e5;
+            this.stats.money += clockSpeed / 15000;
             this.lastMoneyCollected = time;
         }
 
@@ -36,7 +36,7 @@ export default class TaskWorker extends Module {
             this.stats.money = 0;
         });
 
-        this.outputs[0].label.obj.setText(`Money\n$${formatNum(this.stats.money)} [${formatNum(clockSpeed / 1000)}/s]`);
+        this.outputs[0].label.obj.setText(`Money\n$${formatNum(this.stats.money)} [${formatNum(clockSpeed / 15000)}/s]`);
     }
 
 }
